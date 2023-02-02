@@ -3,14 +3,17 @@
 name: CI
 
 on:
-  push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+#   push:
+#     branches: [ "main" ]
+#   pull_request:
+#     branches: [ "main" ]
+  issues:
+    types:
+    - opened
   workflow_dispatch:
 
 jobs:
-  build:
+  hello-world:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -21,3 +24,10 @@ jobs:
         run: |
           echo Add other actions to build,
           echo test, and deploy your project.
+  comment-with-action:
+    runs-on: ubuntu-latest
+    steps:
+      - name: "dump github context"
+      - run: echo '${{ toJSON(github.event) }}' \ jq
+        shell: bash
+  
